@@ -1,0 +1,16 @@
+/cert/
+/logs/
+/target/
+### eclipse IDEA ###
+/.settings/
+.classpath
+.project
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### important ###
+db.properties

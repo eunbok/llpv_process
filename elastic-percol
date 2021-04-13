@@ -1,0 +1,173 @@
+===================================================================== 대분류
+
+POST llpv-percol/_doc/web
+{
+  "large_category":"웹브라우저",
+  "medium_category":"미분류",
+  "priority":0,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/ide
+{
+  "large_category":"통합 개발 환경(IDE)",
+  "medium_category":"미분류",
+  "priority":0,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["eclipse.exe","idea64.exe","Code.exe"] } }
+        ]
+    }
+  }
+}
+
+
+
+
+===================================================================== 중분류
+
+POST llpv-percol/_doc/web-video1
+{
+  "large_category":"웹브라우저",
+  "medium_category":"영상 시청",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*Netflix*" } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/web-video2
+{
+  "large_category":"웹브라우저",
+  "medium_category":"영상 시청",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*YouTube*" } }
+        ]
+    }
+  }
+}
+
+
+POST llpv-percol/_doc/web-portal1
+{
+  "large_category":"웹브라우저",
+  "medium_category":"포털 사이트",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*네이버*" } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/web-portal2
+{
+  "large_category":"웹브라우저",
+  "medium_category":"포털 사이트",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*NAVER*" } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/web-portal3
+{
+  "large_category":"웹브라우저",
+  "medium_category":"포털 사이트",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*Google*" } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/web-portal4
+{
+  "large_category":"웹브라우저",
+  "medium_category":"포털 사이트",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*Daum*" } }
+        ]
+    }
+  }
+}
+
+POST llpv-percol/_doc/web-portal5
+{
+  "large_category":"웹브라우저",
+  "medium_category":"포털 사이트",
+  "priority":1,
+ "query":{
+    "bool":{
+      "must":[
+            { "terms" : { "run_file" : ["chrome.exe","msedge.exe","iexplore.exe"] } },
+            { "wildcard" : { "run_title" : "*네이트*" } }
+        ]
+    }
+  }
+}
+
+
+
+
+=================================== 검색방법
+GET llpv-percol/_search
+{
+  "query":{
+    "percolate":{
+      "field": "query",
+      "documents": [{
+          "@timestamp" : "2021-03-29 19:57:06.165",
+          "_datetime" : "2021-03-29 19:56:07",
+          "run_title" : "Netflix - Chrome",
+          "run_sec" : 2,
+          "stored_time" : "2021-03-29 19:56:09",
+          "client_ip" : "192.168.0.1",
+          "run_file" : "chrome.exe"
+        },{
+          "@timestamp" : "2021-03-29 19:57:06.165",
+          "_datetime" : "2021-03-29 19:56:07",
+          "run_title" : "YouTube - Chrome",
+          "run_sec" : 2,
+          "stored_time" : "2021-03-29 19:56:09",
+          "client_ip" : "192.168.0.1",
+          "run_file" : "chrome.exe"
+        }]
+    }
+  },
+  "sort":{
+    "priority":"desc"
+  }
+}

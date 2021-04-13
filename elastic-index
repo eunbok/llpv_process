@@ -1,0 +1,80 @@
+PUT llpv-log
+{
+  "mappings":{
+    "dynamic":"false",
+    "properties":{
+      "run_title":{
+        "type":"keyword"
+      },
+      "run_file":{
+        "type":"keyword"
+      },
+      "_datetime":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "stored_time":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "@timestamp":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss.SSS"
+      },
+      "run_sec":{
+        "type":"integer"
+      },
+      "large_category":{
+        "type":"keyword"
+      },
+      "medium_category":{
+        "type":"keyword"
+      }
+    }
+  }
+}
+
+
+
+
+PUT llpv-percol
+{
+  "mappings":{
+    "dynamic":"false",
+    "properties":{
+      "run_title":{
+        "type":"keyword"
+      },
+      "run_file":{
+        "type":"keyword"
+      },
+      "_datetime":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "stored_time":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "@timestamp":{
+        "type":"date",
+         "format": "yyyy-MM-dd HH:mm:ss.SSS"
+      },
+      "run_sec":{
+        "type":"integer"
+      },
+      "large_category":{
+        "type":"keyword"
+      },
+      "medium_category":{
+        "type":"keyword"
+      },
+      "priority":{
+        "type":"integer"
+      },
+      "query":{
+        "type": "percolator"
+      }
+    }
+  }
+}

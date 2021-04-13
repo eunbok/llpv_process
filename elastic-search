@@ -1,0 +1,60 @@
+POST llpv-percol/_delete_by_query
+{
+"query":{"match_all":{}}
+}
+
+GET llpv-log/_search
+{
+  "sort": {"_datetime": "desc"}
+}
+
+
+
+GET llpv-log/_search
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "terms": {
+            "client_ip": [
+              "192.168.0.1",
+              "127.0.0.1"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "@timestamp": "desc"
+  }
+}
+
+
+GET llpv-log/_search
+{ 
+  "size":"0",
+  "query": {
+    "range": {
+      "stored_time": {
+        "from": "2021-03-30 00:20:00",
+        "to": "2021-03-30 00:29:59"
+      }
+    }
+  },
+  "aggs": {
+    "rank": {
+      "terms": {
+        "field": "run_file"
+      },
+      "aggs": {
+        "rank_sum": {
+          "sum": {
+            "field": "run_sec"
+          }
+        }
+      }
+    }
+  }
+}
