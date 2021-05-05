@@ -93,7 +93,6 @@ public class PrcSave {
 				elasticDao.saveToES(rdd.collect());
 		});
 
-		// @EXP ǥ ������ �����ִ� ����
 		stream.foreachRDD(new VoidFunction<JavaRDD<ConsumerRecord<String, String>>>() {
 			@Override
 			public void call(JavaRDD<ConsumerRecord<String, String>> rdd) {

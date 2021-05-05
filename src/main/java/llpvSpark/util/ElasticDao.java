@@ -31,8 +31,8 @@ public class ElasticDao {
 		for (String log : data) {
 			JSONObject jo = new JSONObject(log);
 			jo.put("@timestamp", sdf.format(new Date()));
-			jo.put("large_category", "�̺з�");
-			jo.put("medium_category", "�̺з�");
+			jo.put("large_category", "미분류");
+			jo.put("medium_category", "미분류");
 			jarr.put(jo);
 		}
 
