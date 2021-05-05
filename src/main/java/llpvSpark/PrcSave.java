@@ -28,7 +28,7 @@ import org.apache.spark.streaming.kafka010.KafkaUtils;
 import org.apache.spark.streaming.kafka010.LocationStrategies;
 import org.apache.spark.streaming.kafka010.OffsetRange;
 
-import llpvSpark.util.ElasticUt;
+import llpvSpark.util.ElasticDao;
 
 public class PrcSave {
 	private static final Logger log = Logger.getLogger(PrcSave.class);
@@ -44,7 +44,8 @@ public class PrcSave {
 		Properties dbProperties = new Properties();
 		dbProperties.load(dbRead);
 
-		ElasticUt elasticUt = new ElasticUt();
+		ElasticDao elasticDao = new ElasticDao();
+		
 		SparkConf conf = new SparkConf().setAppName("llpv").setMaster("local[*]");
 		Logger.getLogger("org").setLevel(Level.OFF);
 		Logger.getLogger("akka").setLevel(Level.OFF);
@@ -89,10 +90,10 @@ public class PrcSave {
 				is_show = true;
 			}
 			if (cnt > 0)
-				elasticUt.saveToES(rdd.collect());
+				elasticDao.saveToES(rdd.collect());
 		});
 
-		// @EXP Ç¥ ÇüÅÂÀÇ ³²¾ÆÀÖ´Â °³¼ö
+		// @EXP Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
 		stream.foreachRDD(new VoidFunction<JavaRDD<ConsumerRecord<String, String>>>() {
 			@Override
 			public void call(JavaRDD<ConsumerRecord<String, String>> rdd) {
