@@ -26,7 +26,7 @@ public class ElasticUt {
   private static final Logger log = Logger.getLogger(ElasticUt.class);
   private RestClient restClient;
   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-  private static ElasticUt elasticRestClient = null;
+  private static ElasticUt elasticUt = null;
 
   private ElasticUt() throws Exception {
     FileInputStream dbRead = new FileInputStream("db.properties");
@@ -72,14 +72,14 @@ public class ElasticUt {
   }
 
   public static ElasticUt getInstance() throws Exception {
-    if (elasticRestClient == null) {
+    if (elasticUt == null) {
       synchronized (ElasticUt.class) {
-        if (elasticRestClient == null) {
-          elasticRestClient = new ElasticUt();
+        if (elasticUt == null) {
+          elasticUt = new ElasticUt();
         }
       }
     }
-    return elasticRestClient;
+    return elasticUt;
   }
   
   public RestClient getConnection() {
